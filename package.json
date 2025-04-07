@@ -1,0 +1,14 @@
+{
+  "name": "calculator-microservice",
+  "version": "1.0.0",
+  "description": "A calculator microservice with MongoDB integration",
+  "main": "calculator.js",
+  "scripts": {
+    "start": "node calculator.js"
+  },
+  "dependencies": {
+    "mongoose": "^7.8.6",
+    "express": "^4.21.2",
+    "winston": "^3.17.0"
+  }
+}

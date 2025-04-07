@@ -1,0 +1,17 @@
+version: '3.8'  # or higher, depending on your Docker Compose version
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]  
+      interval: 30s  
+      retries: 3 
+      start_period: 5s  
+      timeout: 10s  
+
+    restart: always  
