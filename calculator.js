@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 
+// Add middleware to parse JSON bodies
+app.use(express.json());
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -96,6 +99,51 @@ app.get('/db-health', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE endpoint for deleting a specific calculation by ID
+app.delete('/calculations/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    // Validate if the provided ID is a valid MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      logger.error(`Invalid calculation ID format: ${id}`);
+      return res.status(400).json({ error: 'Invalid calculation ID format' });
+    }
+    
+    // Find and delete the calculation
+    const deletedCalculation = await Calculation.findByIdAndDelete(id);
+    
+    if (!deletedCalculation) {
+      logger.error(`Calculation not found with ID: ${id}`);
+      return res.status(404).json({ error: 'Calculation not found' });
+    }
+    
+    logger.info(`Deleted calculation with ID: ${id}`);
+    res.json({ 
+      message: 'Calculation deleted successfully',
+      deletedCalculation 
+    });
+  } catch (err) {
+    logger.error(`Error deleting calculation: ${err.message}`);
+    res.status(500).json({ error: 'Failed to delete calculation' });
+  }
+});
+
+// DELETE endpoint for deleting all calculations
+app.delete('/calculations', async (req, res) => {
+  try {
+    const result = await Calculation.deleteMany({});
+    logger.info(`Deleted all calculations. Count: ${result.deletedCount}`);
+    res.json({ 
+      message: 'All calculations deleted successfully',
+      deletedCount: result.deletedCount 
+    });
+  } catch (err) {
+    logger.error(`Error deleting all calculations: ${err.message}`);
+    res.status(500).json({ error: 'Failed to delete calculations' });
   }
 });
 

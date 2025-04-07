@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: calculator-app
-        image: lehuy222/calculator-app:9.1p
+        image: lehuy222/calculator-app:10.0
         ports:
         - containerPort: 3000
         env:
