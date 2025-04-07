@@ -54,22 +54,15 @@ kubectl apply -f service.yaml
 4. Verify the Deployment
 
 Check that all pods are running:
+
 bashCopykubectl get pods
-
-You should see output similar to:
-
-CopyNAME                                       READY   STATUS    RESTARTS   AGE
-
-calculator-app-deployment-xxxx-xxxx        1/1     Running   0          1m
-
-mongodb-xxxx-xxxx                          1/1     Running   0          1m
 
 
 5. Test the Application
 
 Forward a local port to the calculator service:
 
-bashCopykubectl port-forward svc/calculator-app-service 3000:3000
+kubectl port-forward svc/calculator-app-service 3000:3000
 
 Test basic calculator operations:
 
