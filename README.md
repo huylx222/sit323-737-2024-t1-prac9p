@@ -23,7 +23,7 @@ cd sit323-737-2024-t1-prac9p
 
 Apply the MongoDB persistent volume and claim:
 
-bashCopykubectl apply -f mongodb-pv-pvc.yaml
+kubectl apply -f mongodb-pv-pvc.yaml
 
 Create the MongoDB credentials secret:
 
@@ -31,14 +31,14 @@ kubectl apply -f mongodb-secret.yaml
 
 Deploy MongoDB:
 
-bashCopykubectl apply -f mongodb-deployment.yaml
+kubectl apply -f mongodb-deployment.yaml
 
 
 3. Deploy the Calculator Application
 
 Build and push the Docker image (optional, image is already available on Docker Hub):
 
-bashCopydocker build -t lehuy222/calculator-app:p9.1 .
+docker build -t lehuy222/calculator-app:p9.1 .
 
 docker push lehuy222/calculator-app:p9.1
 
@@ -55,7 +55,7 @@ kubectl apply -f service.yaml
 
 Check that all pods are running:
 
-bashCopykubectl get pods
+kubectl get pods
 
 
 5. Test the Application
