@@ -9,11 +9,12 @@ kubectl CLI tool
 Git
 
 Setup Instructions
+
 1. Clone the Repository
 
 Clone this repository to your local machine:
 
-bashCopygit clone https://github.com/huylx222/sit323-737-2024-t1-prac9p.git
+git clone https://github.com/huylx222/sit323-737-2024-t1-prac9p.git
 
 cd sit323-737-2024-t1-prac9p
 
